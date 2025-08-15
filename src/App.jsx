@@ -1,28 +1,23 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 
+import Body from "./components/Body"
+import Login from "./components/Login"
+import Profile from "./components/Profile"
+import Feed from "./components/Feed"
 
 function App() {
-  
-
   return (
     <>
-      <div className="navbar bg-base-300 shadow-sm">
-        <div className="flex-1">
-          <a className="btn btn-ghost text-xl">DevTinder</a>
-        </div>
-        <div className="flex gap-2">
-        
-          <div className="dropdown dropdown-end mx-5">
-            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img
-                  alt="Profile"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-              </div>
-            </div>
+    <BrowserRouter basename="/">
+      <Routes>
+        <Route path="/" element={<Body/>} >
+          <Route path="/login" element={<Login/>}></Route>
+          <Route path="/profile" element={<Profile/>}></Route>
+          <Route path="/feed" element={<Feed/>}></Route>
+        </Route>
+      </Routes>
+    </BrowserRouter>
 
-          </div>
-        </div>
-      </div>
     </>
   )
 }
