@@ -1,8 +1,71 @@
-import React from 'react'
+import React, { useState } from 'react'
+import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { addUser } from '../utils/userSlice'
+import { useNavigate } from 'react-router-dom'
+import { BASE_URL } from '../utils/constants'
 
 const Login = () => {
+
+  const [emailId, setEmailId] = useState("safi@gmail.com")
+  const [password, setPassword] = useState("safi123")
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const handleLogin = async () => {
+    try {
+      const res = await axios.post(BASE_URL + "/login", {
+        emailId: emailId,
+        password: password
+      },
+      {
+        withCredentials: true
+      })
+
+      // console.log(res.data.user);
+      dispatch(addUser(res.data.user))
+      navigate("/feed")
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
+  }
+
   return (
-    <div>Login</div>
+    <div className='flex justify-center mt-10'>
+      <div className="card bg-base-300 w-96 shadow-xl">
+        <div className="card-body">
+          <h2 className="card-title text-3xl">Login</h2>
+          <div>
+          <fieldset className="fieldset">
+            <legend className="fieldset-legend">Email Id: {emailId}</legend>
+            <input 
+              type="text"
+              value={emailId} 
+              className="input" 
+              placeholder="Type here" 
+              onChange={(e)=>setEmailId(e.target.value)}
+            />
+          </fieldset>
+
+          <fieldset className="fieldset">
+            <legend className="fieldset-legend">Password</legend>
+            <input 
+              type="password"
+              value={password} 
+              className="input" 
+              placeholder="Type here"
+              onChange={(e)=> setPassword(e.target.value)} 
+            />
+          </fieldset>
+
+          </div>
+          <div className="card-actions justify-center">
+            <button className="btn btn-primary" onClick={handleLogin}>Login</button>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 
