@@ -4,8 +4,10 @@ import Body from "./components/Body"
 import Login from "./components/Login"
 import Profile from "./components/Profile"
 import Feed from "./components/Feed"
+import Error from "./components/Error"
 import { Provider } from "react-redux"
 import appStore from "./utils/appStore"
+
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
             <Route path="/login" element={<Login/>}></Route>
             <Route path="/profile" element={<Profile/>}></Route>
             <Route path="/feed" element={<Feed/>}></Route>
+            <Route path="/error" element={<Error />} />
           </Route>
         </Routes>
       </BrowserRouter>
