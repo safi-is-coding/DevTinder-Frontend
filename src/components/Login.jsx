@@ -9,6 +9,7 @@ const Login = () => {
 
   const [emailId, setEmailId] = useState("safi@gmail.com")
   const [password, setPassword] = useState("safi123")
+  const [error, setError] = useState("")
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -26,8 +27,10 @@ const Login = () => {
       // console.log(res.data.user);
       dispatch(addUser(res.data.user))
       navigate("/feed")
-    } catch (error) {
-      console.error("Login failed:", error);
+    } catch (err) {
+      // console.error("Login failed:", err);
+      const errorMessage = err?.response?.data?.message || "Login Failed !!"
+      setError(errorMessage)
     }
   }
 
@@ -38,30 +41,31 @@ const Login = () => {
           <h2 className="card-title text-3xl">Login</h2>
           <div>
           <fieldset className="fieldset">
-            <legend className="fieldset-legend">Email Id: {emailId}</legend>
+            <legend className="fieldset-legend ">Email Id: {emailId}</legend>
             <input 
               type="text"
               value={emailId} 
-              className="input" 
+              className="input w-full" 
               placeholder="Type here" 
               onChange={(e)=>setEmailId(e.target.value)}
             />
           </fieldset>
 
           <fieldset className="fieldset">
-            <legend className="fieldset-legend">Password</legend>
+            <legend className="fieldset-legend ">Password</legend>
             <input 
               type="password"
               value={password} 
-              className="input" 
+              className="input w-full" 
               placeholder="Type here"
               onChange={(e)=> setPassword(e.target.value)} 
             />
           </fieldset>
 
           </div>
+          <p className="text-red-500">{error}</p>
           <div className="card-actions justify-center">
-            <button className="btn btn-primary" onClick={handleLogin}>Login</button>
+            <button className="btn btn-primary w-full" onClick={handleLogin}>Login</button>
           </div>
         </div>
       </div>
