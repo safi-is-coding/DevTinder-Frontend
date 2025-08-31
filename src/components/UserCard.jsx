@@ -15,11 +15,13 @@ function UserCard({user}) {
           />
 
           {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
+
 
           {/* Card Content */}
           <div className="absolute bottom-0 w-full p-5 text-white">
             <h2 className="text-2xl font-bold">{user.firstName + " " + user.lastName}</h2>
+            <h4>{user.age}, {user.gender}</h4>
             <p className="text-sm opacity-90">
               {user.about}
             </p>

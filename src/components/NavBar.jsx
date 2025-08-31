@@ -43,7 +43,7 @@ const NavBar = () => {
             <div className="w-10 rounded-full">
               <img
                 alt="User avatar"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                src={user.photoUrl}
               />
             </div>
           </div>
@@ -57,7 +57,7 @@ const NavBar = () => {
                 <span className="badge">New</span>
               </Link>
             </li>
-            <li><a>Settings</a></li>
+            <li><Link to="/feed">Feed</Link></li>
             <li><a onClick={handleLogout}>Logout</a></li>
           </ul>
         </div>

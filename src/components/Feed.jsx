@@ -31,7 +31,7 @@ const Feed = () => {
 
   return feed && (
     <>
-      <UserCard user={feed[0]} />
+      <UserCard user={feed[1]} />
     </>
   )
 }
