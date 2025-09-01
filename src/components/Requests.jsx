@@ -1,0 +1,112 @@
+import { Check, X } from "lucide-react"; // ✅ icon imports
+import axios from 'axios'
+import React, { useEffect } from 'react'
+import { BASE_URL } from '../utils/constants'
+import { useDispatch, useSelector } from 'react-redux'
+import { addtRequest } from '../utils/requestSlice'
+
+const Requests = () => {
+  const requests = useSelector((store) => store.requests)
+  const dispatch = useDispatch()
+
+  const fetchRequests = async () => {
+    try {
+      const res = await axios.get(BASE_URL + "/user/requests/received", {
+        withCredentials: true,
+      })
+      dispatch(addtRequest(res?.data?.data))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+ 
+
+  useEffect(() => {
+    fetchRequests()
+  }, [])
+
+  if (!requests) {
+    return
+  }
+  if (requests.length === 0) {
+    return (
+      <div>
+        <h1>No Requests Found</h1>
+      </div>
+    )
+  }
+
+
+return (
+  <div className="overflow-x-auto">
+    <table className="table">
+      {/* head */}
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>About</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {requests.map((request) => {
+          const {
+            _id,
+            firstName,
+            lastName,
+            photoUrl,
+            age,
+            gender,
+            about,
+          } = request.fromUserId;
+
+          return (
+            <tr key={_id}>
+              <td>
+                <div className="flex items-center gap-3">
+                  <div className="avatar">
+                    <div className="mask mask-squircle h-12 w-12">
+                      <img src={photoUrl} alt="Avatar" />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="font-bold">{firstName + " " + lastName}</div>
+                  </div>
+                </div>
+              </td>
+              <td>{age}</td>
+              <td>{gender}</td>
+              <td>{about}</td>
+              <td>
+                <div className="flex gap-2">
+                  {/* Accept button */}
+                  <button
+                    className="btn btn-success btn-circle btn-sm"
+                    onClick={() => handleRequestAction(request._id, "accepted")}
+                  >
+                    <Check className="w-4 h-4" />
+                  </button>
+
+                  {/* Reject button */}
+                  <button
+                    className="btn btn-error btn-circle btn-sm"
+                    onClick={() => handleRequestAction(request._id, "rejected")}
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+);
+
+}
+
+export default Requests
