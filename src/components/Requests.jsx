@@ -18,6 +18,15 @@ const Requests = () => {
     } catch (error) {
       console.log(error)
     }
+  } 
+
+  const reviewRequest = async (requestId, status) => {
+    const res = axios.post(`${BASE_URL}/request/review/${status}/${requestId}`,
+      {},
+      { withCredentials: true}
+    ).then(() => {
+      fetchRequests()
+    })
   }
 
  
@@ -26,13 +35,12 @@ const Requests = () => {
     fetchRequests()
   }, [])
 
-  if (!requests) {
-    return
-  }
+  if (!requests) return;
+
   if (requests.length === 0) {
     return (
-      <div>
-        <h1>No Requests Found</h1>
+      <div className="flex justify-center text-2xl">
+        <h1 className="mt-20 bg-gray-700 p-5 rounded-full ">No Requests Found</h1>
       </div>
     )
   }
@@ -85,7 +93,7 @@ return (
                   {/* Accept button */}
                   <button
                     className="btn btn-success btn-circle btn-sm"
-                    onClick={() => handleRequestAction(request._id, "accepted")}
+                    onClick={() => reviewRequest(request._id, "accepted")}
                   >
                     <Check className="w-4 h-4" />
                   </button>
@@ -93,7 +101,7 @@ return (
                   {/* Reject button */}
                   <button
                     className="btn btn-error btn-circle btn-sm"
-                    onClick={() => handleRequestAction(request._id, "rejected")}
+                    onClick={() => reviewRequest(request._id, "rejected")}
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -110,3 +118,5 @@ return (
 }
 
 export default Requests
+
+// 49.28
