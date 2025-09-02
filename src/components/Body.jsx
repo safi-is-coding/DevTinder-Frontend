@@ -16,6 +16,7 @@ const Body = () => {
   useEffect(() => {
     const fetchUser = async () => {
       // Skip API call if user already exists
+
       if (userData && Object.keys(userData).length > 0) return;
 
       try {

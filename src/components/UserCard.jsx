@@ -1,7 +1,28 @@
+import axios from 'axios';
 import React from 'react'
+import { useDispatch } from 'react-redux';
+import {BASE_URL} from "../utils/constants"
+import { removeUserFromFeed } from "../utils/feedSlice"
 
 function UserCard({user}) {
 
+  const dispatch = useDispatch()
+
+  const handleSendRequest = async (status, userId) => {
+    try {
+      const res = await axios.post(`${BASE_URL}/request/send/${status}/${userId}`,
+        {},
+        {withCredentials:true}
+      )
+
+      dispatch(removeUserFromFeed(user?._id))
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  
 
   return (
     <div>
@@ -29,12 +50,18 @@ function UserCard({user}) {
             {/* Actions */}
             <div className="flex justify-center gap-5 mt-4">
               {/* Dislike Button */}
-              <button className="btn btn-circle bg-red-500 hover:bg-red-600 border-none text-white shadow-lg">
+              <button 
+                className="btn btn-circle bg-red-500 hover:bg-red-600 border-none text-white shadow-lg"
+                onClick={() => handleSendRequest("ignore", user._id)}  
+              >
                 ✕
               </button>
 
               {/* Like Button */}
-              <button className="btn btn-circle bg-green-500 hover:bg-green-600 border-none text-white shadow-lg">
+              <button 
+                className="btn btn-circle bg-green-500 hover:bg-green-600 border-none text-white shadow-lg"
+                onClick={() => handleSendRequest("interested", user._id)}  
+              >
                 ❤
               </button>
             </div>

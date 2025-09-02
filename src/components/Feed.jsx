@@ -29,9 +29,20 @@ const Feed = () => {
     getFeed()
   }, [])
 
+  if(!feed) return
+
+  if(feed.length === 0){
+    return (
+      <div className="flex flex-col items-center justify-center mt-10">
+        <h2 className="text-2xl font-bold mb-4">No more users to show</h2>
+        <p className="text-gray-600">Check back later for more profiles!</p>
+      </div>
+    )
+  }
+
   return feed && (
     <>
-      <UserCard user={feed[1]} />
+      <UserCard user={feed[0]} />
     </>
   )
 }
