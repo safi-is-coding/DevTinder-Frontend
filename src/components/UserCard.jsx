@@ -3,10 +3,12 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import {BASE_URL} from "../utils/constants"
 import { removeUserFromFeed } from "../utils/feedSlice"
+import { useLocation } from 'react-router-dom';
 
 function UserCard({user}) {
 
   const dispatch = useDispatch()
+  const routeLocaton = useLocation()
 
   const handleSendRequest = async (status, userId) => {
     try {
@@ -22,7 +24,7 @@ function UserCard({user}) {
     }
   }
 
-  
+  const isProfilePage = routeLocaton.pathname.includes("/profile")
 
   return (
     <div>
@@ -51,16 +53,18 @@ function UserCard({user}) {
             <div className="flex justify-center gap-5 mt-4">
               {/* Dislike Button */}
               <button 
-                className="btn btn-circle bg-red-500 hover:bg-red-600 border-none text-white shadow-lg"
-                onClick={() => handleSendRequest("ignore", user._id)}  
+                className="btn btn-circle bg-red-500 hover:bg-red-600 border-none text-white shadow-lg cursor-pointer"
+                onClick={() => handleSendRequest("ignore", user._id)}
+                disabled={isProfilePage}  
               >
                 ✕
               </button>
 
               {/* Like Button */}
               <button 
-                className="btn btn-circle bg-green-500 hover:bg-green-600 border-none text-white shadow-lg"
+                className="btn btn-circle bg-green-500 hover:bg-green-600 border-none text-white shadow-lg cursor-pointer"
                 onClick={() => handleSendRequest("interested", user._id)}  
+                disabled={isProfilePage}
               >
                 ❤
               </button>

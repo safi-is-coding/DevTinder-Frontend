@@ -65,8 +65,8 @@ const Login = () => {
 
 
   return (
-    <div className="flex justify-center mt-12 px-4 mb-20">
-  <div className="card bg-base-200/70 backdrop-blur-md w-full max-w-md shadow-2xl rounded-2xl border border-base-300">
+    <div className="flex justify-center mt-12 px-4 mb-30">
+  <div className="card bg-base-300 backdrop-blur-md w-full max-w-md shadow-2xl rounded-2xl border border-base-300">
     <div className="card-body p-6 sm:p-8">
       
       {/* Title */}

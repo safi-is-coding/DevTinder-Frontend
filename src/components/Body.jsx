@@ -16,8 +16,9 @@ const Body = () => {
   useEffect(() => {
     const fetchUser = async () => {
       // Skip API call if user already exists
+      if(userData) return
 
-      if (userData && Object.keys(userData).length > 0) return;
+      // if (userData && Object.keys(userData).length > 0) return;
 
       try {
         const res = await axios.get(BASE_URL + "/profile/view", {
