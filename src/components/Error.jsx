@@ -18,7 +18,7 @@ const Error = ({ message = "Something went wrong. Please try again later." }) =>
           </h1>
           <p className="text-gray-600">{message}</p>
           <button
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/login")}
             className="mt-4 w-full rounded-xl bg-red-500 px-4 py-2 text-white font-medium shadow-md hover:bg-red-600 transition duration-200"
           >
             Reload Page
