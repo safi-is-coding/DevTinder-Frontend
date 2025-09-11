@@ -6,69 +6,71 @@ import axios from 'axios'
 import { removeUser } from '../utils/userSlice'
 
 const NavBar = () => {
-
-  const user = useSelector((store)=> store.user)
+  const user = useSelector((store) => store.user)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  // console.log(user);
 
   const handleLogout = async () => {
     try {
-      const res = axios.post(BASE_URL + "/logout", {}, {withCredentials: true})
+      await axios.post(BASE_URL + "/logout", {}, { withCredentials: true })
       dispatch(removeUser())
-      navigate("/login")
+      navigate("/")
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
 
-
   return (
-    <>
+    <div className="navbar bg-base-300 shadow-sm px-4 sm:px-6 lg:px-10 flex flex-wrap">
+      {/* Left Logo */}
+      <div className="flex-1">
+        <Link to="/" className="btn btn-ghost text-lg sm:text-xl">
+          🤖 DevTinder
+        </Link>
+      </div>
 
-<div className="navbar bg-base-300 shadow-sm px-10">
-  <div className="flex-1">
-    <Link to="/" className="btn btn-ghost text-xl">🤖 DevTinder</Link>
-  </div>
+      {/* Right Section */}
+      {user && (
+        <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+          {/* Welcome message (wraps nicely on mobile) */}
+          <p className="text-sm sm:text-base text-center sm:text-left">
+            Welcome, <b>{user.firstName}</b>
+          </p>
 
-  <div className="flex items-center gap-3">
-    {user && (
-      <>
-        <p>
-          Welcome, <b>{user.firstName} {user.lastName}</b>
-        </p>
-
-        <div className="dropdown dropdown-end">
-          <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-            <div className="w-10 rounded-full">
-              <img
-                alt="User avatar"
-                src={user.photoUrl}
-              />
+          {/* Dropdown Avatar */}
+          <div className="dropdown dropdown-end">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar"
+            >
+              <div className="w-10 rounded-full">
+                <img alt="User avatar" src={user.photoUrl} />
+              </div>
             </div>
-          </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] w-52 p-2 shadow bg-base-100 rounded-box"
-          >
-            <li>
-              <Link to="/profile" className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </Link>
-            </li>
-            <li><Link to="/feed">Feed</Link></li>
-            <li><Link to="/connections">Connections</Link></li>
-            <li><Link to="/requests">Requests</Link></li>
-            <li><a onClick={handleLogout}>Logout</a></li>
-          </ul>
-        </div>
-      </>
-    )}
-  </div>
-</div>
 
-    </>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 z-[1] w-52 p-2 shadow bg-base-100 rounded-box"
+            >
+              <li>
+                <Link to="/profile" className="justify-between">
+                  Profile
+                  <span className="badge">New</span>
+                </Link>
+              </li>
+              <li><Link to="/feed">Feed</Link></li>
+              <li><Link to="/connections">Connections</Link></li>
+              <li><Link to="/requests">Requests</Link></li>
+              <li><Link to="/changePassword">Change Password</Link></li>
+              <li>
+                <button onClick={handleLogout}>Logout</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      )}
+    </div>
   )
 }
 
