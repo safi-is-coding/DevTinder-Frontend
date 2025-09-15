@@ -98,7 +98,7 @@ const handleSignUp = async () => {
             {!isLoginForm && (
               <>
                 <fieldset className="fieldset">
-                  <legend className="fieldset-legend text-sm font-medium text-gray-600">First Name</legend>
+                  <legend className="fieldset-legend text-sm font-medium ">First Name</legend>
                   <input
                     type="text"
                     value={firstName}
@@ -109,7 +109,7 @@ const handleSignUp = async () => {
                 </fieldset>
 
                 <fieldset className="fieldset">
-                  <legend className="fieldset-legend text-sm font-medium text-gray-600">Last Name</legend>
+                  <legend className="fieldset-legend text-sm font-medium ">Last Name</legend>
                   <input
                     type="text"
                     value={lastName}
@@ -122,7 +122,7 @@ const handleSignUp = async () => {
             )}
 
             <fieldset className="fieldset">
-              <legend className="fieldset-legend text-sm font-medium text-gray-600">Email</legend>
+              <legend className="fieldset-legend text-sm font-medium ">Email</legend>
               <input
                 type="text"
                 value={emailId}
@@ -133,7 +133,7 @@ const handleSignUp = async () => {
             </fieldset>
 
             <fieldset className="fieldset">
-              <legend className="fieldset-legend text-sm font-medium text-gray-600">Password</legend>
+              <legend className="fieldset-legend text-sm font-medium ">Password</legend>
               <input
                 type="password"
                 value={password}
@@ -145,13 +145,13 @@ const handleSignUp = async () => {
 
             {!isLoginForm && (
               <fieldset className="fieldset">
-                <legend className="fieldset-legend">Pick a file</legend>
+                <legend className="fieldset-legend">Profile Photo<span className='text-red-400'>(Optional)</span></legend>
                 <input
                   type="file"
-                  className="file-input"
+                  className="file-input w-full rounded-xl"
                   onChange={(e) => setPhoto(e.target.files[0])} // store file in state
                 />
-                <label className="label">Max size 2MB</label>
+                <label className="label">Max size 900KB</label>
               </fieldset>
             )}
           </div>

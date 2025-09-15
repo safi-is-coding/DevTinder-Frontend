@@ -51,6 +51,7 @@ function ChangePassword() {
     <>
     <div className="flex justify-center px-4 mt-20">
   <div className="flex flex-col justify-center w-full max-w-md bg-base-300 p-6 sm:p-10 rounded-2xl shadow-md">
+    <h2 className="text-2xl sm:text-3xl font-semibold mb-6 text-center">Change Password</h2>
     
     {/* Old Password */}
     <fieldset className="fieldset mb-4">

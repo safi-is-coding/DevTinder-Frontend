@@ -101,10 +101,10 @@ const EditProfile = ({ user }) => {
                 <legend className="fieldset-legend">Profile Photo</legend>
                 <input
                   type="file"
-                  className="file-input"
+                  className="file-input w-full"
                   onChange={handleFileChange}
                 />
-                <label className="label">Max size 2MB</label>
+                <label className="label">Max size 900KB</label>
               </fieldset>
 
               <fieldset className="fieldset">
