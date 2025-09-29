@@ -4,10 +4,13 @@ import React, { useEffect } from 'react'
 import { BASE_URL } from '../utils/constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { addtRequest } from '../utils/requestSlice'
+import { useNavigate } from "react-router-dom";
 
 const Requests = () => {
   const requests = useSelector((store) => store.requests)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+
 
   const fetchRequests = async () => {
     try {
@@ -52,11 +55,11 @@ return (
       {/* head */}
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Gender</th>
-          <th>About</th>
+          <th>User</th>
+          {/* <th>Age</th> */}
           <th>Actions</th>
+          {/* <th>Gender</th> */}
+          {/* <th>About</th> */}
         </tr>
       </thead>
       <tbody>
@@ -66,18 +69,15 @@ return (
             firstName,
             lastName,
             photoUrl,
-            age,
-            gender,
-            about,
           } = request.fromUserId;
 
           return (
             <tr key={_id}>
               <td>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-5">
                   <div className="avatar">
-                    <div className="mask mask-squircle h-12 w-12">
-                      <img src={photoUrl} alt="Avatar" />
+                    <div className="mask mask-squircle h-20 w-20">
+                      <img src={photoUrl} className="w-20 h-20" alt="Avatar" onClick={()=> navigate(`/profile/view/${_id}`)} />
                     </div>
                   </div>
                   <div>
@@ -85,9 +85,9 @@ return (
                   </div>
                 </div>
               </td>
-              <td>{age}</td>
-              <td>{gender}</td>
-              <td>{about}</td>
+              {/* <td>{age}</td> */}
+              {/* <td>{gender}</td> */}
+              {/* <td>{about}</td> */}
               <td>
                 <div className="flex gap-2">
                   {/* Accept button */}
