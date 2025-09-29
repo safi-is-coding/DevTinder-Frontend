@@ -21,7 +21,7 @@ const NavBar = () => {
   }
 
   return (
-    <div className="navbar bg-base-300 shadow-sm px-4 sm:px-6 lg:px-10 flex flex-wrap">
+    <div className="navbar bg-base-300 shadow-sm px-4 sm:px-6 lg:px-10 flex flex-wrap sticky top-0 z-50">
       {/* Left Logo */}
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost text-lg sm:text-xl">

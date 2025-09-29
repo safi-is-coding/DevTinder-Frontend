@@ -43,7 +43,7 @@ const Connections = () => {
 
 
         return(
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto mb-20">
             <table className="table"> 
                 {/* head */}
                 <thead>

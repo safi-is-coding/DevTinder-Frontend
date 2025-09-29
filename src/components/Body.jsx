@@ -17,25 +17,25 @@ const Body = () => {
   // Check if current route is landing page
   const isLandingPageRoute = location.pathname.includes("/landingPage");
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      // Skip API call if user already exists
-      if (userData) return;
+  const fetchUser = async () => {
+    // Skip API call if user already exists
+    if (userData) return;
 
-      try {
-        const res = await axios.get(BASE_URL + "/profile/view", {
-          withCredentials: true,
-        });
-        dispatch(addUser(res.data.data));
-      } catch (error) {
-        
-        if (error.response?.status === 401) {
-          navigate("/login");
-        } else {
-          console.error("Error fetching user data:", error);
-        }
+    try {
+      const res = await axios.get(BASE_URL + "/profile/view", {
+        withCredentials: true,
+      });
+      dispatch(addUser(res.data.data));
+    } catch (error) {
+      
+      if (error.response?.status === 401) {
+        navigate("/login");
+      } else {
+        console.error("Error fetching user data:", error);
       }
-    };
+    }
+  };
+  useEffect(() => {
 
     fetchUser();
   }, [dispatch, navigate, userData]);
