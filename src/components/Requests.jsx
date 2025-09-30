@@ -17,7 +17,7 @@ const Requests = () => {
       const res = await axios.get(BASE_URL + "/user/requests/received", {
         withCredentials: true,
       })
-      dispatch(addtRequest(res?.data?.data))
+      dispatch(addtRequest(res?.data?.data.reverse()))
     } catch (error) {
       console.log(error)
     }
@@ -85,7 +85,12 @@ return (
                   </div>
                 </div>
               </td>
-              <td>{new Date(request.requestTime).toLocaleDateString()}</td>
+              <td>
+                {isNaN(new Date(request.requestTime).getTime()) 
+                  ? "Not Recorded" 
+                  : new Date(request.requestTime).toLocaleDateString()}
+              </td>
+
               <td>
                 <div className="flex gap-2">
                   {/* Accept button */}

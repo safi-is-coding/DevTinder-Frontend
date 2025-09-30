@@ -13,7 +13,9 @@ function UserCard({user}) {
   const handleSendRequest = async (status, userId) => {
     try {
       const res = await axios.post(`${BASE_URL}/request/send/${status}/${userId}`,
-        {},
+        {
+          "requestTime": Date.now()
+        },
         {withCredentials:true}
       )
 
