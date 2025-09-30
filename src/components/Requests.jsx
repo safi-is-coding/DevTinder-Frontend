@@ -86,9 +86,9 @@ return (
                 </div>
               </td>
               <td>
-                {isNaN(new Date(request.requestTime).getTime()) 
-                  ? "Not Recorded" 
-                  : new Date(request.requestTime).toLocaleDateString()}
+                {request.requestTime 
+                  ? new Date(request.requestTime).toLocaleDateString() 
+                  : "Not Available"}
               </td>
 
               <td>
