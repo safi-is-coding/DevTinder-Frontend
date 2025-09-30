@@ -13,6 +13,8 @@ const EditProfile = ({ user }) => {
   const [about, setAbout] = useState(user?.about)
   const [photoUrl, setPhotoUrl] = useState(user?.photoUrl) // preview image
   const [photo, setPhoto] = useState(null) // new file
+  const [skills, setSkills] = useState(user?.skills || [])
+  const [skillsInput, setSkillsInput] = useState((user?.skills || []).join(", "))
   const [error, setError] = useState("")
   const [showToast, setShowToast] = useState(false)
   const [loading, setLoading] = useState(false) 
@@ -30,6 +32,13 @@ const EditProfile = ({ user }) => {
       formData.append("age", age)
       formData.append("gender", gender)
       formData.append("about", about)
+      // formData.append("skills", skills)
+      skills.forEach((skill) => {
+        formData.append("skills[]", skill)
+      })
+      
+
+      console.log(skills);
 
       if (photo) {
         formData.append("photo", photo) // only append if user picked a new file
@@ -140,9 +149,26 @@ const EditProfile = ({ user }) => {
                   onChange={(e) => setAbout(e.target.value)} 
                 />
               </fieldset>
+
+              <fieldset className="fieldset md:col-span-2">
+                <legend className="fieldset-legend">Skills</legend>
+                <textarea 
+                  value={skillsInput} 
+                  placeholder='Enter skills seperated by comma ","'
+                  className="textarea textarea-bordered w-full text-sm md:text-base" 
+                  rows={3}
+                   
+                  onChange={(e) => {
+                      setSkillsInput(e.target.value)
+                      setSkills(e.target.value.split(",").map(skill => skill.trim()))
+                    }
+                  } 
+                />
+              </fieldset>
             </div>
 
             <p className="text-red-500 mt-2">{error}</p>
+
             <div className="card-actions justify-center mt-5">
               <button 
                 className="btn btn-primary w-full md:w-1/3 flex justify-center items-center gap-2" 

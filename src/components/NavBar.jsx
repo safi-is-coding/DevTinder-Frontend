@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { BASE_URL } from '../utils/constants'
@@ -6,6 +6,7 @@ import axios from 'axios'
 import { removeUser } from '../utils/userSlice'
 
 const NavBar = () => {
+  const [totalRequests, setTotalRequests] = useState(0)
   const user = useSelector((store) => store.user)
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -19,6 +20,21 @@ const NavBar = () => {
       console.log(error)
     }
   }
+
+  const showTotatRequests = async () => {
+    try {
+      const response = await axios.get(BASE_URL + "/user/requests/received", { withCredentials: true })
+      console.log(response);
+      setTotalRequests(response.data.data.length)
+    } catch (error) {
+      setTotalRequests(0)
+      console.log(error)
+    }
+  }
+
+  useEffect(()=> {
+    showTotatRequests()
+  }, [totalRequests, showTotatRequests])
 
   return (
     <div className="navbar bg-base-300 shadow-sm px-4 sm:px-6 lg:px-10 flex flex-wrap sticky top-0 z-50">
@@ -51,19 +67,27 @@ const NavBar = () => {
 
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] w-52 p-2 shadow bg-base-100 rounded-box"
+              className="menu menu-sm dropdown-content mt-3 z-[1] w-42 p-2 shadow bg-base-100 rounded-box"
             >
               <li>
                 <Link to="/profile" className="justify-between">
                   Profile
-                  <span className="badge">New</span>
+                  {/* <span className="badge">New</span> */}
                 </Link>
               </li>
               <li><Link to="/feed">Feed</Link></li>
               <li><Link to="/connections">Connections</Link></li>
-              <li><Link to="/requests">Requests</Link></li>
-              <li><Link to="/changePassword">Change Password</Link></li>
               <li>
+                <Link to="/requests">
+                  Requests
+                  {
+                    totalRequests > 0 && 
+                    <span className="badge bg-red-500">{totalRequests}</span>
+                  }
+                </Link>
+              </li>
+              <li><Link to="/changePassword">Change Password</Link></li>
+              <li className='text-red-500 rounded-full'>
                 <button onClick={handleLogout}>Logout</button>
               </li>
             </ul>

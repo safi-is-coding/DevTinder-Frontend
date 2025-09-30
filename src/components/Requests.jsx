@@ -51,15 +51,14 @@ const Requests = () => {
 
 return (
   <div className="overflow-x-auto">
-    <table className="table">
+    <h2 className="text-1xl font-bold mb-5 text-gray-300 m-5 text-center border-amber-200 border-2 p-2 rounded-full">Total Requests: {requests.length}</h2>
+    <table className="table mb-30">
       {/* head */}
       <thead>
         <tr>
           <th>User</th>
-          {/* <th>Age</th> */}
+          <th>Request Received On</th>
           <th>Actions</th>
-          {/* <th>Gender</th> */}
-          {/* <th>About</th> */}
         </tr>
       </thead>
       <tbody>
@@ -69,10 +68,11 @@ return (
             firstName,
             lastName,
             photoUrl,
+
           } = request.fromUserId;
 
           return (
-            <tr key={_id}>
+            <tr key={_id} className="text-center">
               <td>
                 <div className="flex items-center gap-5">
                   <div className="avatar">
@@ -85,9 +85,7 @@ return (
                   </div>
                 </div>
               </td>
-              {/* <td>{age}</td> */}
-              {/* <td>{gender}</td> */}
-              {/* <td>{about}</td> */}
+              <td>{new Date(request.requestTime).toLocaleDateString()}</td>
               <td>
                 <div className="flex gap-2">
                   {/* Accept button */}

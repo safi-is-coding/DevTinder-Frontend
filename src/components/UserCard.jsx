@@ -28,7 +28,7 @@ function UserCard({user}) {
 
   return (
     <div>
-      <div className="flex items-center justify-center mt-3">
+      <div className="flex items-center justify-center mt-15">
         <div className="relative w-80 h-[28rem] rounded-2xl shadow-xl overflow-hidden ">
           {/* Image */}
           <img

@@ -50,6 +50,7 @@ const Connections = () => {
 
   return (
     <div className="overflow-x-auto mb-20">
+      <h2 className="text-1xl font-bold mb-5 text-gray-300 m-5 text-center border-amber-200 border-2 p-2 rounded-full">Total Connections: {connections.length}</h2>
       <table className="table">
         {/* head */}
         <thead>
