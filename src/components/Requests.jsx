@@ -55,7 +55,7 @@ return (
     <table className="table mb-30">
       {/* head */}
       <thead>
-        <tr>
+        <tr className="text-center">
           <th>User</th>
           <th>Request Received On</th>
           <th>Actions</th>
@@ -74,14 +74,14 @@ return (
           return (
             <tr key={_id} className="text-center">
               <td>
-                <div className="flex items-center gap-5">
+                <div className="flex items-center gap-5 flex-col">
                   <div className="avatar">
-                    <div className="mask mask-squircle h-20 w-20">
+                    <div className="mask mask-squircle h-20 w-20 ">
                       <img src={photoUrl} className="w-20 h-20" alt="Avatar" onClick={()=> navigate(`/profile/view/${_id}`)} />
                     </div>
                   </div>
                   <div>
-                    <div className="font-bold">{firstName + " " + lastName}</div>
+                      <h2 className="font-bold">{firstName + " " + lastName}</h2>
                   </div>
                 </div>
               </td>
